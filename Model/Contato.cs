@@ -7,12 +7,13 @@ using System.Text;
 namespace Model
 {   
     [Table("contatos")]
-    public class Contato
+    public class Contato:Base
     {
-        [Key, Column("tipo")]
+
+        [ Column("tipo")]
         public string Tipo { get; set; }
 
-        [Key,Column("valor")]
+        [Column("valor")]
         public string Valor { get; set; }
 
         [ForeignKey("id_cliente")]

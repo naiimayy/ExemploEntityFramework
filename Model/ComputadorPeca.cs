@@ -7,7 +7,7 @@ using System.Text;
 namespace Model
 {
     [Table("computadores_pecas")]
-    public class ComputadorPeca
+    public class ComputadorPeca: Base
     {
         [ForeignKey("IdPeca")]
         public Peca Peca { get; set; }

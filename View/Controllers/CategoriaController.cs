@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Model;
+using Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,13 @@ namespace View.Controllers
 {
     public class CategoriaController : Controller
     {
+        private ICategoriaRepository repository;
+
+        public CategoriaController(ICategoriaRepository repository)
+        {
+            this.repository = repository;
+        }
+
         [HttpGet]
         public IActionResult index()
         {
@@ -23,12 +32,14 @@ namespace View.Controllers
         /// <param name="ColunaOrdem"></param>
         /// <param name="ordem"></param>
         /// <returns>Retorna as categorias</returns>
-        [HttpGet, Route("ObterTodos")]
-        public IActionResult ObterTodos(
+        
+        [HttpGet, Route("categoria/ObterTodos")]
+        public JsonResult ObterTodos(
             string busca = "", int quantidade = 10, int pagina = 0,
-            string ColunaOrdem = "nome", string ordem="ASC")
+            string colunaOrdem = "nome", string ordem="ASC")
         {
-            return Ok(); 
+            List<Categoria> categorias = repository.ObterTodos(quantidade, pagina, busca, colunaOrdem, ordem);
+            return Json(categorias); 
         }
     }
 }

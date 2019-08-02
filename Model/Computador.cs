@@ -8,7 +8,7 @@ using System.Text;
 namespace Model
 {
     [Table("computadores")]
-    public class Computador
+    public class Computador: Base
     {
         [Column("id_categoria")]
         public int IdCategoria { get; set; }

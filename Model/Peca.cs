@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Model
 {
     [Table("pecas")]
-    public class Peca
+    public class Peca: Base
     {
         [Column("nome")]
         public string Nome { get; set; }
