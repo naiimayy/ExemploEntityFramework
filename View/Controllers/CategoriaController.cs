@@ -39,7 +39,8 @@ namespace View.Controllers
             string colunaOrdem = "nome", string ordem="ASC")
         {
             List<Categoria> categorias = repository.ObterTodos(quantidade, pagina, busca, colunaOrdem, ordem);
-            return Json(categorias); 
+
+            return Json(new { data = categorias }); 
         }
 
         [HttpPost]
