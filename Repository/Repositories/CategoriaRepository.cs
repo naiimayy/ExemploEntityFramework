@@ -57,11 +57,11 @@ namespace Repository.Repositories
                 switch (colunaOrdem)
                 {
                     case "id":
-                        query = query.OrderByDescending(x => x.Id);
+                        query = query.OrderBy(x => x.Id);
                         break;
 
                     case "nome":
-                        query = query.OrderByDescending(x => x.Nome);
+                        query = query.OrderBy(x => x.Nome);
                         break;
                 }
             }
@@ -81,5 +81,7 @@ namespace Repository.Repositories
 
             return query.Skip(pagina).Take(quantidade).ToList();
         }
+
+        
     }
 }

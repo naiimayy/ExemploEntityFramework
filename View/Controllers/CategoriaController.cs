@@ -41,5 +41,31 @@ namespace View.Controllers
             List<Categoria> categorias = repository.ObterTodos(quantidade, pagina, busca, colunaOrdem, ordem);
             return Json(categorias); 
         }
+
+        [HttpPost]
+        public JsonResult Cadastrar([FromBody]Categoria categoria)
+        {
+            categoria.RegistroAtivo = true;
+            int id = repository.Inserir(categoria);
+            // objeto anonimo
+            var retorno = new { id = id };
+            return Json(retorno);
+        }
+
+        [HttpPost]
+        public JsonResult Alterar([FromBody]Categoria categoria)
+        {
+            bool alterado = repository.Alterar(categoria);
+            var resultado = new { status = alterado };
+            return Json(resultado);
+        }
+
+        [HttpGet]
+        public JsonResult Apagar(int id)
+        {
+            bool apagou = repository.Apagar(id);
+            var resultado = new { status = apagou };
+            return Json(resultado);
+        }
     }
 }

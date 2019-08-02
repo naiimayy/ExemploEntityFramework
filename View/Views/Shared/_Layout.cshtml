@@ -4,11 +4,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           @RenderSection("Styles", required: false)
+    <link rel="stylesheet" href="~/css/bootstrap.css"/>
+    <link rel="stylesheet" href="~/css/datatables.min.css"/>
 </head>
 <body>
     <div class="container-fluid">
         @RenderBody()
     </div>
+    <script src="~/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="~/js/popper.min.js"~></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/datatables.min.js"></script>
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>
