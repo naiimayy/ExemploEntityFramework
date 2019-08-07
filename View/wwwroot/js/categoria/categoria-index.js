@@ -27,6 +27,25 @@
         }
     });
 
+    function alterar($nome) {
+        $.ajax({
+            url: 'https://localhost:5001/categoria/alterar',
+            method: 'post',
+            dataType: 'json',
+            data: {
+                id: $idPutz,
+                nome: $nome
+            },
+            success: function (data) {
+                $('#modal-categoria').modal('hide');
+                $tabelaCategoria.ajax.reload();
+                $idPutz = -1;
+                $('#categoria-campo-nome').val('');
+
+            }
+        })
+    }
+
     function salvar($nome) {
         $.ajax({
             url: "https://localhost:5001/categoria/cadastrar",
