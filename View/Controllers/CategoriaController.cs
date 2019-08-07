@@ -44,7 +44,7 @@ namespace View.Controllers
         }
 
         [HttpPost]
-        public JsonResult Cadastrar([FromBody]Categoria categoria)
+        public JsonResult Cadastrar([FromForm]Categoria categoria)
         {
             categoria.RegistroAtivo = true;
             int id = repository.Inserir(categoria);
@@ -54,7 +54,7 @@ namespace View.Controllers
         }
 
         [HttpPost]
-        public JsonResult Alterar([FromBody]Categoria categoria)
+        public JsonResult Alterar([FromForm]Categoria categoria)
         {
             bool alterado = repository.Alterar(categoria);
             var resultado = new { status = alterado };
@@ -67,6 +67,12 @@ namespace View.Controllers
             bool apagou = repository.Apagar(id);
             var resultado = new { status = apagou };
             return Json(resultado);
+        }
+
+        [HttpGet, Route("categoria/obterpeloid")]
+        public JsonResult ObterPeloId(int id)
+        {
+            return Json(repository.ObterPeloId(id));
         }
     }
 }

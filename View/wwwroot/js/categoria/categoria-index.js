@@ -1,11 +1,69 @@
 ﻿$(function () {
-    $("#categoria-index").DataTable({
-        ajax:"https://localhost:5001/categoria/obtertodos?colunaOder=nome&ordem=DESC",
+    $id = -1;
+
+    $tabelaCategoria = $("#categoria-index").DataTable({
+        ajax: "https://localhost:5001/categoria/obtertodos?colunaOder=nome&ordem=DESC",
         serverSide: true,
         columns: [
             { data: 'id' },
             { data: 'nome' },
-            { data:'id' }
+            {
+                render: function (data, type, row) {
+                    return '<button class="btn btn-primary mr-2 botao-editar" data-id= "' + row.id + '"> Editar\</buton> \
+                <button class="btn btn-danger botao-apagar" data-id= "' + row.id + '"> Apagar</button>'
+                }
+            }
         ]
-    })
+    });
+
+    $('#categoria-botao-salvar').on('click', function () {
+    $nome = $('#categoria-campo-nome').val();
+
+    $.ajax({
+        url: "https://localhost:5001/categoria/cadastrar",
+        method: "post",
+        dataType: "json",
+        data: {
+            nome: $nome
+        },
+        success: function (data) {
+            $('#modal-categoria').modal('hide');
+            $tabelaCategoria.ajax.reload();
+        },
+        error: function (error) {
+            alert('DEU RUIM');
+        }
+    });
+});
+
+    $(".table").on('click', '.botao-apagar', function () {
+        $id = $(this).data('id');
+        $.ajax({
+            url: 'https://localhost:5001/categoria/apagar?id=' + $id,
+            method: 'get',
+            success: function (data) {
+                $tabelaCategoria.ajax.reload();
+            },
+            error: function (error) {
+                alert('Não deu boa');
+            }
+
+        })
+    });
+
+    $('.table').on('click', '.botao-editar', function () {
+        $id = $(this).data('id');
+        $.ajax({
+            url: 'https://localhost:5001/categoria/obterpeloid?id=' + $id,
+            method: 'get',
+            success: function (data) {
+
+            },
+            error: function (error) {
+                alert('Não foi possível carregar o modal');
+            }
+        })
+    });
 })
+
+
