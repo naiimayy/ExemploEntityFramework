@@ -1,9 +1,10 @@
 ﻿$(function () {
-    $id = -1;
+    $idPutz = -1;
 
     $tabelaCategoria = $("#categoria-index").DataTable({
         ajax: "https://localhost:5001/categoria/obtertodos?colunaOder=nome&ordem=DESC",
         serverSide: true,
+
         columns: [
             { data: 'id' },
             { data: 'nome' },
@@ -17,24 +18,32 @@
     });
 
     $('#categoria-botao-salvar').on('click', function () {
-    $nome = $('#categoria-campo-nome').val();
+        $nome = $('#categoria-campo-nome').val();
 
-    $.ajax({
-        url: "https://localhost:5001/categoria/cadastrar",
-        method: "post",
-        dataType: "json",
-        data: {
-            nome: $nome
-        },
-        success: function (data) {
-            $('#modal-categoria').modal('hide');
-            $tabelaCategoria.ajax.reload();
-        },
-        error: function (error) {
-            alert('DEU RUIM');
+        if ($idPutz == -1) {
+            salvar($nome);
+        } else {
+            alterar($nome)
         }
     });
-});
+
+    function salvar($nome) {
+        $.ajax({
+            url: "https://localhost:5001/categoria/cadastrar",
+            method: "post",
+            dataType: "json",
+            data: {
+                nome: $nome
+            },
+            success: function (data) {
+                $('#modal-categoria').modal('hide');
+                $tabelaCategoria.ajax.reload();
+            },
+            error: function (error) {
+                alert('DEU RUIM');
+            }
+        });
+    }
 
     $(".table").on('click', '.botao-apagar', function () {
         $id = $(this).data('id');
@@ -52,11 +61,13 @@
     });
 
     $('.table').on('click', '.botao-editar', function () {
-        $id = $(this).data('id');
+        $idPutz = $(this).data('id');
         $.ajax({
-            url: 'https://localhost:5001/categoria/obterpeloid?id=' + $id,
+            url: 'https://localhost:5001/categoria/obterpeloid?id=' + $idPutz,
             method: 'get',
             success: function (data) {
+                $("#categoria-campo-nome").val(data.nome);
+                $("#modal-categoria").modal("show");
 
             },
             error: function (error) {
