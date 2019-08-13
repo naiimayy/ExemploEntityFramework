@@ -17,6 +17,13 @@ namespace View.Controllers
             this.repository = repository;
         }
 
+        [HttpGet,Route("obtertodosselect2")]
+        public JsonResult ObterTodosSelect2()
+        {
+            var categorias = repository.ObterTodosSelect2();
+            return Json(categorias);
+        }
+
         [HttpGet]
         public IActionResult index()
         {

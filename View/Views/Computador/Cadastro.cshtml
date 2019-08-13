@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Cadastro";
+}
+
+<h2>Cadastro</h2>
+
+<form action="@Url.Action("Cadastro")" method="post">
+    <div class="form-group">
+        <label for="computador-cadastro-categoria">Categoria</label>
+        <select class="form-control" id="computador-cadastro-categoria" name="categoria">
+            <option>Selecione uma Categoria</option>
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label for="computador-cadastro-nome">Nome</label>
+        <input id="computador-cadastro-nome" name="nome" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="computador-cadastro-preco">Preço</label>
+        <input id="computador-cadastro-preco" name="preco" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Salvar</button>
+
+</form>

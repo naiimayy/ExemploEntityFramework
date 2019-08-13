@@ -82,6 +82,9 @@ namespace Repository.Repositories
             return query.Skip(pagina).Take(quantidade).ToList();
         }
 
-        
+        public List<Categoria> ObterTodosSelect2()
+        {
+            return context.Categorias.Where(x => x.RegistroAtivo).OrderBy(x => x.Nome).ToList();
+        }
     }
 }

@@ -4,21 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using Repository.Interfaces;
 using Repository.Repositories;
 
 namespace View.Controllers
 {
-    [Route("computaodr/")]
+    [Route("computador/")]
     public class ComputadorController : Controller
     {
-        private ComputadorRepository repository;
+        private IComputadorRepository repository;
 
-        public ComputadorController(ComputadorRepository repository)
+        public ComputadorController(IComputadorRepository repository)
         {
             this.repository = repository;
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }
@@ -56,6 +57,12 @@ namespace View.Controllers
         public ActionResult ObterTodos()
         {
             return Json(repository.ObterTodos());
+        }
+
+        [HttpGet, Route("cadastro")]
+        public ActionResult Cadastro()
+        {
+            return View();
         }
     }
 }
