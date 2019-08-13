@@ -17,6 +17,6 @@ namespace Repository.Interfaces
 
         bool Apagar(int id);
 
-        List<Categoria> ObterTodosSelect2();
+        List<Categoria> ObterTodosSelect2(string pesquisa);
     }
 }

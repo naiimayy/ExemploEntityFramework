@@ -3,12 +3,16 @@
     ViewData["Title"] = "Cadastro";
 }
 
+@section Scripts{ 
+<script src="~/js/computador/computador-cadastro.js"></script>
+}
+
 <h2>Cadastro</h2>
 
 <form action="@Url.Action("Cadastro")" method="post">
     <div class="form-group">
         <label for="computador-cadastro-categoria">Categoria</label>
-        <select class="form-control" id="computador-cadastro-categoria" name="categoria">
+        <select class="form-control" id="computador-cadastro-categoria" name="idCategoria">
             <option>Selecione uma Categoria</option>
         </select>
     </div>
