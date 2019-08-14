@@ -39,7 +39,7 @@ namespace View.Controllers
             return Json(resultado);
         }
 
-        [HttpPost, Route("apagar")]
+        [HttpGet, Route("apagar")]
         public JsonResult Apagar (int id)
         {
             var apagou = repository.Apagar(id);
@@ -51,7 +51,7 @@ namespace View.Controllers
         public JsonResult ObterTodos()
         {
             var pecas = repository.ObterTodos();
-            return Json(pecas);
+            return Json(new { data = pecas });
         }
 
         [HttpGet, Route("obterpeloid")]

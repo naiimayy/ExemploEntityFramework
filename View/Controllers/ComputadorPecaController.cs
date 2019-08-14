@@ -8,6 +8,7 @@ using Repository.Interfaces;
 
 namespace View.Controllers
 {
+    [Route("computadorpeca/")]
     public class ComputadorPecaController : Controller
     {
         private IComputadorPecaRepository repository;
@@ -39,7 +40,12 @@ namespace View.Controllers
         [HttpGet, Route("obtertodos")]
         public JsonResult ObterTodosPeloIdComputadore(int idComputador)
         {
-            return Json(repository.ObterTodosPeloIdComputador(idComputador));
+            return Json(
+                new
+                {
+                    data = repository.ObterTodosPeloIdComputador(idComputador)
+                }
+                );
         }
 
         [HttpGet, Route("obterpeloid")]
