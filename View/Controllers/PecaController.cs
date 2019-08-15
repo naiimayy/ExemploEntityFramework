@@ -23,7 +23,7 @@ namespace View.Controllers
             return View();
         }
 
-        [HttpPost,Route("inserir")]
+        [HttpPost, Route("inserir")]
         public JsonResult Inserir([FromForm] Peca peca)
         {
             var id = repository.Inserir(peca);
@@ -32,7 +32,7 @@ namespace View.Controllers
         }
 
         [HttpPost, Route("alterar")]
-        public JsonResult Alterar ([FromForm]Peca peca)
+        public JsonResult Alterar([FromForm]Peca peca)
         {
             var alterado = repository.Alterar(peca);
             var resultado = new { status = alterado };
@@ -40,7 +40,7 @@ namespace View.Controllers
         }
 
         [HttpGet, Route("apagar")]
-        public JsonResult Apagar (int id)
+        public JsonResult Apagar(int id)
         {
             var apagou = repository.Apagar(id);
             var resultado = new { status = apagou };
@@ -61,6 +61,28 @@ namespace View.Controllers
             if (peca == null)
                 return NotFound();
             return Json(peca);
+        }
+
+        [HttpGet, Route("obtertodosselect2")]
+        public JsonResult ObterTodosSelect2(string term = "")
+        {
+            term = term == null ? "" : term;
+            var registros = repository.ObterTodos();
+            registros = registros.Where(x => x.Nome.Contains(term)).ToList();
+            var pecasSelect2 = new List<object>();
+
+            foreach (var peca in registros)
+            {
+                pecasSelect2.Add(new
+                {
+                    id = peca.Id,
+                    text = peca.Nome
+                });
+            }
+            return Json(new
+            {
+                results = pecasSelect2
+            });
         }
     }
 }

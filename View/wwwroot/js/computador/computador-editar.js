@@ -1,5 +1,5 @@
 ﻿$(function () {
-    $idComputador = $("computador-id").val();
+    $idComputador = $("#computador-id").val();
 
     $("#computador-editar-categoria").select2({
         ajax: {
